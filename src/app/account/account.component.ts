@@ -15,8 +15,7 @@ import { AvatarComponent } from "../avatar/avatar.component";
 export class AccountComponent implements OnInit {
   loading = false;
   profile!: Profile;
-
-  @Input() session!: AuthSession;
+  session: any; // Déclaration explicite avec `any` ou le type que tu utilises pour la session
 
   updateProfileForm: any; // Déclare le formulaire sans initialisation ici
 
@@ -32,6 +31,15 @@ export class AccountComponent implements OnInit {
       website: '',
       avatar_url: '',
     });
+
+        // Initialisation de la session lors de l'initialisation du composant
+        this.session = this.supabase.session;
+
+        // Gestion des changements de session
+        this.supabase.authChanges((_, session) => {
+          this.session = session;
+        });
+    
 
     this.getProfile();
   }
