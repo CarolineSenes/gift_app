@@ -4,11 +4,12 @@ import { SupabaseService } from './supabase.service';
 import { CommonModule } from '@angular/common';
 import { AccountComponent } from "./account/account.component";
 import { AuthComponent } from "./auth/auth.component";
+import { NavbarComponent } from "./navbar/navbar.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterModule, AccountComponent, AuthComponent],
+  imports: [CommonModule, RouterModule, AccountComponent, AuthComponent, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
