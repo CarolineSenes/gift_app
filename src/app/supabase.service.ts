@@ -77,4 +77,25 @@ export class SupabaseService {
     this._session = data.session;
     return this._session;
   }
+
+  // Fonction pour insérer les données dans la table `gift_ideas`
+  async addGiftIdea(giftData: any) {
+    // Récupérer l'ID de l'utilisateur authentifié
+    const user = this.session?.user.id;
+
+    if (!user) {
+      throw new Error("Utilisateur non authentifié.");
+    }
+
+    const { data, error } = await this.supabase
+      .from('gift_ideas')
+      .insert([{ ...giftData, user_id: user }]);
+
+    if (error) {
+      console.error('Erreur lors de l’insertion:', error);
+      return null;
+    }
+
+    return data;
+  }
 }

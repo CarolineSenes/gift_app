@@ -1,1 +1,80 @@
-<p>gift-to-offer-form works!</p>
+<div class="row flex-center flex">
+    <div class="col-6 form-widget" aria-live="polite">
+      <h1 class="header">Gift idea to give</h1>
+      <form [formGroup]="gift_ideas_form" (ngSubmit)="onSubmit()" class="form-widget">
+
+        <div>
+            <label for="idea">Gif</label>
+            <input
+              id="idea"
+              formControlName="idea"
+              class="inputField"
+              type="text"
+            />
+        </div>
+
+        <div>
+            <label for="link">Link</label>
+            <input
+              id="link"
+              formControlName="link"
+              class="inputField"
+              type="text"
+            />
+        </div>
+
+        <div>
+            <label for="link">Price</label>
+            <input
+              id="price"
+              formControlName="price"
+              class="inputField"
+              type="number"
+            />
+        </div>
+ 
+        <div>
+          <label for="person_name">To offer to</label>
+          <input
+            id="person_name"
+            formControlName="person_name"
+            class="inputField"
+            type="text"
+          />
+        </div>
+
+        <div>
+            <label for="occasion">Occasion</label>
+            <input
+              id="occasion"
+              formControlName="occasion"
+              class="inputField"
+              type="text"
+            />
+        </div>
+
+        <div>
+            <label for="is_offered">Was offered?</label>
+            <div class="radio-group" *ngFor="let option of offeredOptions">
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    formControlName="is_offered"
+                    [value]="option.value"
+                  />
+                  {{ option.label }}
+                </label>
+            </div>
+        </div>
+
+        <div>
+          <button type="submit" class="button block" aria-label="submit">
+            Submit
+          </button>
+        </div>
+        <div *ngIf="submissionSuccess" class="confirmation-message">
+            Your gift idea has been successfully submitted!
+        </div>
+      </form>
+    </div>
+</div>

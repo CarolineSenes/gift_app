@@ -1,0 +1,22 @@
+.radio-group {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 15px;
+  }
+  
+  .radio-option {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .radio-option input {
+    margin-right: 5px;
+  }
+  
+  .confirmation-message {
+    margin-top: 15px;
+    color: green;
+    font-weight: bold;
+  }
+  
