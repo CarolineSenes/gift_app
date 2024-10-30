@@ -1,80 +1,72 @@
-<div class="row flex-center flex">
-    <div class="col-6 form-widget" aria-live="polite">
-      <h1 class="header">Gift idea to give</h1>
-      <form [formGroup]="gift_ideas_form" (ngSubmit)="onSubmit()" class="form-widget">
-
-        <div>
-            <label for="idea">Gif</label>
-            <input
-              id="idea"
-              formControlName="idea"
-              class="inputField"
-              type="text"
-            />
-        </div>
-
-        <div>
-            <label for="link">Link</label>
-            <input
-              id="link"
-              formControlName="link"
-              class="inputField"
-              type="text"
-            />
-        </div>
-
-        <div>
-            <label for="link">Price</label>
-            <input
-              id="price"
-              formControlName="price"
-              class="inputField"
-              type="number"
-            />
-        </div>
- 
-        <div>
-          <label for="person_name">To offer to</label>
-          <input
-            id="person_name"
-            formControlName="person_name"
-            class="inputField"
-            type="text"
-          />
-        </div>
-
-        <div>
-            <label for="occasion">Occasion</label>
-            <input
-              id="occasion"
-              formControlName="occasion"
-              class="inputField"
-              type="text"
-            />
-        </div>
-
-        <div>
-            <label for="is_offered">Was offered?</label>
-            <div class="radio-group" *ngFor="let option of offeredOptions">
-                <label class="radio-option">
-                  <input
-                    type="radio"
-                    formControlName="is_offered"
-                    [value]="option.value"
-                  />
-                  {{ option.label }}
-                </label>
-            </div>
-        </div>
-
-        <div>
-          <button type="submit" class="button block" aria-label="submit">
-            Submit
-          </button>
-        </div>
-        <div *ngIf="submissionSuccess" class="confirmation-message">
-            Your gift idea has been successfully submitted!
-        </div>
-      </form>
+<div class="flex flex-col">
+  <h1 class="text-xl font-bold mb-5">Gift idea to give</h1>
+  <form [formGroup]="gift_ideas_form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+    <div>
+      <label class="input input-bordered flex items-center gap-2" for="idea"
+        >Gif
+        <input id="idea" formControlName="idea" class="grow" type="text" />
+      </label>
     </div>
+
+    <div>
+      <label for="link" class="input input-bordered flex items-center gap-2"
+        >Link
+        <input id="link" formControlName="link" class="grow" type="text" />
+      </label>
+    </div>
+
+    <div>
+      <label for="link" class="input input-bordered flex items-center gap-2"
+        >Price
+        <input id="price" formControlName="price" class="grow" type="number" />
+      </label>
+    </div>
+
+    <div>
+      <label
+        for="person_name"
+        class="input input-bordered flex items-center gap-2"
+        >To offer to
+        <input
+          id="person_name"
+          formControlName="person_name"
+          class="grow"
+          type="text"
+        />
+      </label>
+    </div>
+
+    <div>
+      <label for="occasion" class="input input-bordered flex items-center gap-2"
+        >Occasion
+        <input
+          id="occasion"
+          formControlName="occasion"
+          class="grow"
+          type="text"
+        />
+      </label>
+    </div>
+
+    <div>
+      <label for="">Was offered?</label>
+      <div class="form-control" *ngFor="let option of offeredOptions">
+        <label class="label cursor-pointer">
+          <span class="label-text">{{ option.label }}</span>
+          <input
+            type="radio"
+            name="radio-10"
+            class="radio radio-primary"
+            checked="checked"
+            formControlName="is_offered"
+            [value]="option.value"
+          />
+        </label>
+      </div>
+    </div>
+
+    <div>
+      <button type="submit" aria-label="submit" class="btn btn-outline btn-primary">Submit</button>
+    </div>
+  </form>
 </div>

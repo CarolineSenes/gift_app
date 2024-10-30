@@ -43,8 +43,9 @@ export class GiftToOfferFormComponent {
     this.supabase.authChanges((_, session) => {
       this.session = session;
     });
+    console.log(this.session);
+    
   }
-
 
   // Fonction de soumission du formulaire
   async onSubmit() {

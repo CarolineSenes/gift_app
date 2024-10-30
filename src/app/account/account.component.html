@@ -1,25 +1,49 @@
-<form [formGroup]="updateProfileForm" (ngSubmit)="updateProfile()" class="form-widget">
-    <app-avatar [avatarUrl]="this.avatarUrl" (upload)="updateAvatar($event)"> </app-avatar>
+<div class="flex flex-col w-full">
+  <h1 class="text-xl font-bold mb-5">Profile</h1>
+
+  <form
+    [formGroup]="updateProfileForm"
+    (ngSubmit)="updateProfile()"
+    class="flex flex-col gap-4"
+  >
+    <app-avatar [avatarUrl]="this.avatarUrl" (upload)="updateAvatar($event)">
+    </app-avatar>
+
+    <label class="input input-bordered flex items-center gap-2">
+      <div class="label">
+        <span for="email" class="label-text">Email</span>
+      </div>
+      <input
+        id="email"
+        type="text"
+        [value]="session.user.email"
+        disabled
+      />
+    </label>
+
+    <label class="input input-bordered flex items-center gap-2">
+      <div class="label">
+        <span for="username" class="label-text">User name</span>
+      </div>
+      <input
+        id="username"
+        type="text"
+        formControlName="username"
+      />
+    </label>
+
     <div>
-      <label for="email">Email</label>
-      <input id="email" type="text" [value]="session.user.email" disabled />
-    </div>
-    <div>
-      <label for="username">Name</label>
-      <input formControlName="username" id="username" type="text" />
-    </div>
-    <div>
-      <label for="website">Website</label>
-      <input formControlName="website" id="website" type="url" />
-    </div>
-  
-    <div>
-      <button type="submit" class="button primary block" [disabled]="loading">
-        {{ loading ? 'Loading ...' : 'Update' }}
+      <button
+        type="submit"
+        class="btn btn-outline btn-primary mt-5"
+        [disabled]="loading"
+      >
+        {{ loading ? "Loading ..." : "Update" }}
       </button>
     </div>
-  
+
     <div>
-      <button class="button block" (click)="signOut()">Sign Out</button>
+      <button class="btn btn-active btn-ghost" (click)="signOut()">Sign Out</button>
     </div>
-</form>
+  </form>
+</div>

@@ -98,4 +98,13 @@ export class SupabaseService {
 
     return data;
   }
+
+  // Récupérer les idées de cadeaux pour l'utilisateur connecté
+  async getGiftIdeasForUser(userId: string) {
+    const { data, error } = await this.supabase
+      .from('gift_ideas')
+      .select('*')
+      .eq('user_id', userId);
+    return { data, error };
+  }
 }
