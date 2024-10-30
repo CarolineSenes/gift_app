@@ -1,6 +1,6 @@
 <section>
   @if (giftIdeas.length > 0) { @for (idea of giftIdeas; track idea.id) {
-  <div class="card bg-base-100 w-96 shadow-xl mb-3">
+  <div class="card bg-gray-800 w-96 shadow-xl mb-3">
     <!-- <figure>
       <img
         src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
@@ -8,10 +8,10 @@
       />
     </figure> -->
     <div class="card-body overflow-hidden">
-      <h2 class="card-title truncate">Gift: {{ idea.idea }}</h2>
+      <h2 class="card-title truncate">{{ idea.idea }}</h2>
       <p>
         @if(idea.link) {
-        <a [href]="idea.link" target="_blank">View</a>
+        <a [href]="idea.link" target="_blank">Link</a>
         } @else {
         <span>No link</span>
         }
