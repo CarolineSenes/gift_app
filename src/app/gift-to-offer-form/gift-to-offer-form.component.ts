@@ -43,8 +43,6 @@ export class GiftToOfferFormComponent {
     this.supabase.authChanges((_, session) => {
       this.session = session;
     });
-    console.log(this.session);
-    
   }
 
   // Fonction de soumission du formulaire
@@ -53,19 +51,15 @@ export class GiftToOfferFormComponent {
       const formData = this.gift_ideas_form.value;
       try {
         const result = await this.supabase.addGiftIdea(formData);
-        console.log('Résultat de l’insertion:', result);
 
         if (result) {
-          console.log('Données envoyées avec succès :', result);
           this.submissionSuccess = true;
           this.gift_ideas_form.reset();
         }
       } catch (error) {
-        console.error('Erreur lors de l’envoi des données :', error);
         this.submissionSuccess = false;
       }
     } else {
-      console.log('Formulaire invalide');
       this.submissionSuccess = false;
     }
   }
