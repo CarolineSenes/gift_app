@@ -6,9 +6,10 @@ import { AuthGuard } from './auth.guard';
 import { GiftIdeaListComponent } from './gift-idea-list/gift-idea-list.component';
 
 export const routes: Routes = [
-  { path: '', component: GiftToOfferFormComponent, canActivate: [AuthGuard] }, // Garde la route par défaut sans redirectTo
+  { path: '', component: GiftIdeaListComponent, canActivate: [AuthGuard] }, // Garde la route par défaut sans redirectTo
   { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
   { path: 'auth', component: AuthComponent },
   { path: 'gift-to-offer-form', component: GiftToOfferFormComponent, canActivate: [AuthGuard] },
+  { path: 'gift-to-offer-form/:id', component: GiftToOfferFormComponent },
   { path: 'gift-list', component: GiftIdeaListComponent, canActivate: [AuthGuard] },
 ];
