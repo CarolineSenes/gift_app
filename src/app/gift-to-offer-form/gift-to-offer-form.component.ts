@@ -24,7 +24,7 @@ export class GiftToOfferFormComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder, // Le formBuilder est initialisé ici
     private readonly supabase: SupabaseService,
-    private router: Router,
+    private router: Router
   ) {
     // Initialisation du formulaire
     this.gift_ideas_form = this.fb.group({
@@ -72,12 +72,27 @@ export class GiftToOfferFormComponent implements OnInit {
 
   async onSubmit() {
     if (this.gift_ideas_form.valid) {
-      if (this.gift_ideas_form.get('id')) {
+      const formData = this.gift_ideas_form.value;
+
+      if (this.idea.id) {
         // Mise à jour de l'idée existante
-        console.log('UPDATE');
+        try {
+          const result = await this.supabase.updateGiftIdea(
+            this.idea.id,
+            formData
+          );
+
+          if (result) {
+            this.submissionSuccess = true;
+            console.log('Idea updated successfully');
+            this.gift_ideas_form.reset();
+          }
+        } catch (error) {
+          console.error('Erreur lors de la mise à jour :', error);
+          this.submissionSuccess = false;
+        }
       } else {
         // Création d'une nouvelle idée
-        const formData = this.gift_ideas_form.value;
         try {
           const result = await this.supabase.addGiftIdea(formData);
 

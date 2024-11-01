@@ -99,6 +99,27 @@ export class SupabaseService {
     return data;
   }
 
+  async updateGiftIdea(id: number, data: any) {
+    // Récupérer l'ID de l'utilisateur authentifié
+    const user = this.session?.user.id;
+
+    if (!user) {
+      throw new Error("Utilisateur non authentifié.");
+    }
+
+    const { data: result, error } = await this.supabase
+      .from('gift_ideas')
+      .update(data)
+      .eq('id', id);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return result;
+  }
+
+
   // Récupérer les idées de cadeaux pour l'utilisateur connecté
   async getGiftIdeasForUser(userId: string) {
     const { data, error } = await this.supabase
