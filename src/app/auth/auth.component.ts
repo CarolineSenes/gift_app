@@ -38,10 +38,8 @@ export class AuthComponent implements OnInit {
 
       alert('Check your email for the login link!');
 
-      // Redirection après connexion
-      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/gift-to-offer-form';
-      this.router.navigate([returnUrl]); // Redirige l'utilisateur vers la page demandée ou account
-
+      // Redirection après connexion vers la liste des cadeaux
+      this.router.navigate(['/gift-list']);
     } catch (error) {
       if (error instanceof Error) {
         alert(error.message);
