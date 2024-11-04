@@ -49,4 +49,13 @@ export class GiftIdeaListComponent {
     sessionStorage.setItem('selectedIdea', JSON.stringify(idea));
     this.router.navigate(['/gift-to-offer-form', idea.id]);
   }
+
+  async onDeleteIdea(idea: any): Promise<void> {
+    const { error } = await this.supabase.deleteGiftIdea(idea.id);
+    if (!error) {
+      this.giftIdeas = this.giftIdeas.filter(g => g.id !== idea.id);
+    } else {
+      console.error('Erreur lors de la suppression de l\'idée dans Supabase :', error);
+    }
+  }
 }

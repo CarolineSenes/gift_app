@@ -1,6 +1,28 @@
 <section>
   @if (giftIdeas.length > 0) { @for (idea of giftIdeas; track idea.id) {
-  <div class="card bg-gray-800 w-96 shadow-xl mb-3 cursor-pointer" (click)="onEditIdea(idea)">
+  <div
+    class="card bg-gray-800 w-96 shadow-xl mb-3 cursor-pointer"
+    (click)="onEditIdea(idea)"
+  >
+    <button
+      class="absolute top-2 right-2 btn btn-circle"
+      (click)="onDeleteIdea(idea); $event.stopPropagation()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M3 6h18M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2m-5 4v6m4-6v6M5 6h14l-1 14H6L5 6z"
+        />
+      </svg>
+    </button>
     <!-- <figure>
       <img
         src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"

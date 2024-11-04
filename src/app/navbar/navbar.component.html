@@ -3,10 +3,10 @@
     <a class="btn btn-ghost text-xl" (click)="navigateToGiftList()">kDo</a>
   </div>
   @if(session){
-    <div class="navbar-end">
+    <div class="navbar-end gap-2">
       <div>
         <ul class="menu menu-horizontal px-1">
-          <li><a (click)="navigateToGiftForm()">Add</a></li>
+          <li><button class="btn btn-outline btn-accent" (click)="navigateToGiftForm()">Add</button></li>
         </ul>
       </div>
   

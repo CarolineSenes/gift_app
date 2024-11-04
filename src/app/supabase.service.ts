@@ -128,4 +128,18 @@ export class SupabaseService {
       .eq('user_id', userId);
     return { data, error };
   }
+
+  // Supprimer une idée de cadeau pour l'utilisateur connecté
+  async deleteGiftIdea(id: number): Promise<{ data: any; error: any }> {
+    const { data, error } = await this.supabase
+      .from('gift_ideas')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      console.error('Erreur lors de la suppression de l\'idée :', error);
+    }
+
+    return { data, error };
+  }
 }

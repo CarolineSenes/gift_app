@@ -66,7 +66,7 @@ export class GiftToOfferFormComponent implements OnInit {
       });
     } else {
       console.warn('Aucune idée trouvée, redirection vers la liste');
-      this.router.navigate(['/gift-idea-list']); // Redirection si aucun objet `idea` n’est trouvé
+      this.router.navigate(['/gift-list']); // Redirection si aucun objet `idea` n’est trouvé
     }
   }
 
@@ -105,6 +105,7 @@ export class GiftToOfferFormComponent implements OnInit {
         }
       }
       this.gift_ideas_form.reset();
+      this.router.navigate(['/gift-list']);
     } else {
       this.submissionSuccess = false;
     }
