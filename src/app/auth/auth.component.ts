@@ -19,7 +19,7 @@ export class AuthComponent implements OnInit {
     private readonly supabase: SupabaseService,
     private readonly formBuilder: FormBuilder, // Le formBuilder est initialisé ici
     private readonly router: Router,
-    private readonly route: ActivatedRoute,
+    private readonly route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -38,8 +38,9 @@ export class AuthComponent implements OnInit {
 
       alert('Check your email for the login link!');
 
-      // Redirection après connexion vers la liste des cadeaux
-      this.router.navigate(['/gift-list']);
+      // Redirection après connexion
+      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+      this.router.navigate([returnUrl]); // Redirige l'utilisateur vers la page demandée ou account
     } catch (error) {
       if (error instanceof Error) {
         alert(error.message);
