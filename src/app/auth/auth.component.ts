@@ -13,11 +13,11 @@ import { SupabaseService } from '../supabase.service';
 })
 export class AuthComponent implements OnInit {
   loading = false;
-  signInForm: any; // Déclare le formulaire sans l'initialiser ici
+  signInForm: any;
 
   constructor(
     private readonly supabase: SupabaseService,
-    private readonly formBuilder: FormBuilder, // Le formBuilder est initialisé ici
+    private readonly formBuilder: FormBuilder,
     private readonly router: Router,
     private readonly route: ActivatedRoute
   ) {}
@@ -30,24 +30,29 @@ export class AuthComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
-    try {
-      this.loading = true;
-      const email = this.signInForm.value.email as string;
-      const { error } = await this.supabase.signIn(email);
-      if (error) throw error;
+    await this.supabase.signInWithGoogle();
+    // try {
+    //   this.loading = true;
+    //   const email = this.signInForm.value.email as string;
+    //   const { error } = await this.supabase.signIn(email);
+    //   if (error) throw error;
 
-      alert('Check your email for the login link!');
+    //   alert('Check your email for the login link!');
 
-      // Redirection après connexion
-      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-      this.router.navigate([returnUrl]); // Redirige l'utilisateur vers la page demandée ou account
-    } catch (error) {
-      if (error instanceof Error) {
-        alert(error.message);
-      }
-    } finally {
-      this.signInForm.reset();
-      this.loading = false;
-    }
+    //   // Redirection après connexion
+    //   const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    //   this.router.navigate([returnUrl]); // Redirige l'utilisateur vers la page demandée ou account
+    // } catch (error) {
+    //   if (error instanceof Error) {
+    //     alert(error.message);
+    //   }
+    // } finally {
+    //   this.signInForm.reset();
+    //   this.loading = false;
+    // }
   }
+
+  // async signInWithGoogle() {
+  //   await this.supabase.signInWithGoogle();
+  // }
 }

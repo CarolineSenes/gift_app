@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable } from '@angular/core';
 import {
   AuthChangeEvent,
   AuthSession,
@@ -6,32 +6,35 @@ import {
   Session,
   SupabaseClient,
   User,
-} from '@supabase/supabase-js'
-import { environment } from '../environments/environment'
+} from '@supabase/supabase-js';
+import { environment } from '../environments/environment';
 
 export interface Profile {
-  id?: string
-  username: string
-  website: string
-  avatar_url: string
+  id?: string;
+  username: string;
+  website: string;
+  avatar_url: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class SupabaseService {
-  private supabase: SupabaseClient
-  _session: AuthSession | null = null
+  private supabase: SupabaseClient;
+  _session: AuthSession | null = null;
 
   constructor() {
-    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey)
+    this.supabase = createClient(
+      environment.supabaseUrl,
+      environment.supabaseKey
+    );
   }
 
   get session() {
     this.supabase.auth.getSession().then(({ data }) => {
-      this._session = data.session
-    })
-    return this._session
+      this._session = data.session;
+    });
+    return this._session;
   }
 
   profile(user: User) {
@@ -39,36 +42,49 @@ export class SupabaseService {
       .from('profiles')
       .select(`username, website, avatar_url`)
       .eq('id', user.id)
-      .single()
+      .single();
   }
 
-  authChanges(callback: (event: AuthChangeEvent, session: Session | null) => void) {
-    return this.supabase.auth.onAuthStateChange(callback)
+  authChanges(
+    callback: (event: AuthChangeEvent, session: Session | null) => void
+  ) {
+    return this.supabase.auth.onAuthStateChange(callback);
+  }
+
+  async signInWithGoogle(): Promise<void> {
+    try {
+      await this.supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: '/' } // Remplacez par l'URL de redirection souhaitée
+      });
+    } catch (error) {
+      console.error('Erreur lors de la connexion avec Google:', error);
+    }
   }
 
   signIn(email: string) {
-    return this.supabase.auth.signInWithOtp({ email })
+    return this.supabase.auth.signInWithOtp({ email });
   }
 
   signOut() {
-    return this.supabase.auth.signOut()
+    return this.supabase.auth.signOut();
   }
 
   updateProfile(profile: Profile) {
     const update = {
       ...profile,
       updated_at: new Date(),
-    }
+    };
 
-    return this.supabase.from('profiles').upsert(update)
+    return this.supabase.from('profiles').upsert(update);
   }
 
   downLoadImage(path: string) {
-    return this.supabase.storage.from('avatars').download(path)
+    return this.supabase.storage.from('avatars').download(path);
   }
 
   uploadAvatar(filePath: string, file: File) {
-    return this.supabase.storage.from('avatars').upload(filePath, file)
+    return this.supabase.storage.from('avatars').upload(filePath, file);
   }
 
   // Méthode asynchrone pour obtenir la session
@@ -84,7 +100,7 @@ export class SupabaseService {
     const user = this.session?.user.id;
 
     if (!user) {
-      throw new Error("Utilisateur non authentifié.");
+      throw new Error('Utilisateur non authentifié.');
     }
 
     const { data, error } = await this.supabase
@@ -104,7 +120,7 @@ export class SupabaseService {
     const user = this.session?.user.id;
 
     if (!user) {
-      throw new Error("Utilisateur non authentifié.");
+      throw new Error('Utilisateur non authentifié.');
     }
 
     const { data: result, error } = await this.supabase
@@ -118,7 +134,6 @@ export class SupabaseService {
 
     return result;
   }
-
 
   // Récupérer les idées de cadeaux pour l'utilisateur connecté
   async getGiftIdeasForUser(userId: string) {
@@ -137,7 +152,7 @@ export class SupabaseService {
       .eq('id', id);
 
     if (error) {
-      console.error('Erreur lors de la suppression de l\'idée :', error);
+      console.error("Erreur lors de la suppression de l'idée :", error);
     }
 
     return { data, error };

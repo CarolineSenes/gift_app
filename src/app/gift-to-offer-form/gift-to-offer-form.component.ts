@@ -66,7 +66,7 @@ export class GiftToOfferFormComponent implements OnInit {
       });
     } else {
       console.warn('Aucune idée trouvée, redirection vers la liste');
-      this.router.navigate(['/gift-list']); // Redirection si aucun objet `idea` n’est trouvé
+      // this.router.navigate(['/gift-list']); // Redirection si aucun objet `idea` n’est trouvé
     }
   }
 
@@ -74,7 +74,7 @@ export class GiftToOfferFormComponent implements OnInit {
     if (this.gift_ideas_form.valid) {
       const formData = this.gift_ideas_form.value;
 
-      if (this.idea.id) {
+      if (this.idea && this.idea.id) {
         // Mise à jour de l'idée existante
         try {
           const result = await this.supabase.updateGiftIdea(
