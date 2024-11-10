@@ -1,7 +1,7 @@
-<section>
+<section class="w-screen px-5">
   @if (giftIdeas.length > 0) { @for (idea of giftIdeas; track idea.id) {
   <div
-    class="card bg-gray-800 w-96 shadow-xl mb-3 cursor-pointer"
+    class="card bg-gray-800 w-full shadow-xl mb-3 cursor-pointer"
     (click)="onEditIdea(idea)"
   >
     <button
@@ -30,7 +30,7 @@
       />
     </figure> -->
     <div class="card-body overflow-hidden">
-      <h2 class="card-title truncate">{{ idea.idea }}</h2>
+      <h2 class="card-title truncate text-primary">{{ idea.idea }}</h2>
       <p>
         @if(idea.link) {
         <a [href]="idea.link" target="_blank">Link</a>

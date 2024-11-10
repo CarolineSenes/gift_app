@@ -65,7 +65,7 @@ export class GiftToOfferFormComponent implements OnInit {
         is_offered: this.idea.is_offered,
       });
     } else {
-      console.warn('Aucune idée trouvée, redirection vers la liste');
+      console.warn('Aucune idée de cadeau trouvée, redirection vers la liste');
       // this.router.navigate(['/gift-list']); // Redirection si aucun objet `idea` n’est trouvé
     }
   }

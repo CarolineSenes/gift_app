@@ -1,4 +1,6 @@
-<app-navbar></app-navbar>
+@if(isAuthenticated){
+  <app-navbar></app-navbar>
+}
 <div class="container flex justify-center">
   <router-outlet></router-outlet>
 </div>

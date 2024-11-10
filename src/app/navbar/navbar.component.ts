@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   session: any;
+  avatarUrl: string | undefined;
 
   constructor(
     private readonly supabase: SupabaseService,
@@ -25,6 +26,10 @@ export class NavbarComponent {
     this.supabase.authChanges((_, session) => {
       this.session = session;
     });
+
+    if (this.session) {
+      this.avatarUrl = this.session.user.user_metadata?.avatar_url;
+    }
   }
 
   navigateToGiftForm() {

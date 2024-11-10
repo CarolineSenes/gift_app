@@ -1,29 +1,20 @@
-<div class="flex flex-col">
-    <h1 class="text-xl font-bold mb-5">Sign in</h1>
-    <!-- <p class="mb-5">Sign in via magic link with your email below</p> -->
-    <form [formGroup]="signInForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
-      <!-- <div>
-        <label for="email" class="input input-bordered flex items-center gap-2">
-        <input
-          id="email"
-          formControlName="email"
-          class="inputField"
-          type="email"
-          placeholder="Your email"
-        />
-      </label>
-      </div>
-
-      <div>
-        <button type="submit" aria-label="submit" class="btn btn-outline btn-primary" [disabled]="loading">
-          {{ loading ? "Loading" : "Send magic link" }}
-        </button>
-      </div> -->
-
-      <div>
-        <button type="submit" aria-label="submit" class="btn btn-outline btn-primary" [disabled]="loading">
-          {{ loading ? "Loading" : "Sign in with Google" }}
-        </button>
-      </div>
-    </form>
+<div class="hero bg-base-200 min-h-screen">
+  <div class="hero-content text-center">
+    <div class="max-w-md">
+      <h1 class="text-5xl font-bold">Welcome to<br><span class="font-extrabold tracking-wide text-primary">k<span class="text-accent">Do</span></span>!</h1>
+      <p class="py-6">
+        Easily organize your gift ideas with kDo! Create personalized lists for
+        giving or receiving gifts, and never miss a special occasion again.
+      </p>
+      <button
+        type="submit"
+        aria-label="submit"
+        class="btn btn-primary"
+        [disabled]="loading"
+        (click)="onSubmit()"
+      >
+        {{ loading ? "Loading" : "Sign in with Google" }}
+      </button>
+    </div>
+  </div>
 </div>

@@ -1,31 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SupabaseService } from './supabase.service'; 
+import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { AccountComponent } from "./account/account.component";
-import { AuthComponent } from "./auth/auth.component";
+import { SupabaseService } from './supabase.service'; 
 import { NavbarComponent } from "./navbar/navbar.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterModule, AccountComponent, AuthComponent, NavbarComponent],
+  imports: [CommonModule, RouterModule, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
   title = 'kdoApp';
-  session: any; // Déclaration explicite avec `any` ou le type que tu utilises pour la session
+  isAuthenticated = false;
 
   constructor(private readonly supabase: SupabaseService) {}
 
   ngOnInit() {
-    // Initialisation de la session lors de l'initialisation du composant
-    this.session = this.supabase.session;
+    // Vérifie l'état de la session actuelle
+    this.supabase.getSession().then((session) => {
+      this.isAuthenticated = !!session;
+    });
 
     // Gestion des changements de session
     this.supabase.authChanges((_, session) => {
-      this.session = session;
+      this.isAuthenticated = !!session;
     });
   }
 }

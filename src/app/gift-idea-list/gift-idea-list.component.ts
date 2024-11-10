@@ -53,9 +53,12 @@ export class GiftIdeaListComponent {
   async onDeleteIdea(idea: any): Promise<void> {
     const { error } = await this.supabase.deleteGiftIdea(idea.id);
     if (!error) {
-      this.giftIdeas = this.giftIdeas.filter(g => g.id !== idea.id);
+      this.giftIdeas = this.giftIdeas.filter((g) => g.id !== idea.id);
     } else {
-      console.error('Erreur lors de la suppression de l\'idée dans Supabase :', error);
+      console.error(
+        "Erreur lors de la suppression de l'idée dans Supabase :",
+        error
+      );
     }
   }
 }

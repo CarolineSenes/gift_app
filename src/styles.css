@@ -1,0 +1,3 @@
+.text-primary {
+  color: var(--btn-primary-color, #737dff);
+}

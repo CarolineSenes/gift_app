@@ -1,23 +1,27 @@
 <div class="flex flex-col">
   <h1 class="text-xl font-bold mb-5">Gift idea to give</h1>
-  <form [formGroup]="gift_ideas_form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+  <form
+    [formGroup]="gift_ideas_form"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col gap-4"
+  >
     <div>
       <label class="input input-bordered flex items-center gap-2" for="idea"
-        >Gif
+        ><span class="font-semibold">Gift</span>
         <input id="idea" formControlName="idea" class="grow" type="text" />
       </label>
     </div>
 
     <div>
       <label for="link" class="input input-bordered flex items-center gap-2"
-        >Link
+        ><span class="font-semibold">Link</span>
         <input id="link" formControlName="link" class="grow" type="text" />
       </label>
     </div>
 
     <div>
       <label for="link" class="input input-bordered flex items-center gap-2"
-        >Price
+        ><span class="font-semibold">Price</span>
         <input id="price" formControlName="price" class="grow" type="number" />
       </label>
     </div>
@@ -26,7 +30,7 @@
       <label
         for="person_name"
         class="input input-bordered flex items-center gap-2"
-        >To offer to
+        ><span class="font-semibold">To offer to</span>
         <input
           id="person_name"
           formControlName="person_name"
@@ -38,7 +42,7 @@
 
     <div>
       <label for="occasion" class="input input-bordered flex items-center gap-2"
-        >Occasion
+        ><span class="font-semibold">Occasion</span>
         <input
           id="occasion"
           formControlName="occasion"
@@ -49,24 +53,28 @@
     </div>
 
     <div>
-      <label for="">Was offered?</label>
-      <div class="form-control" *ngFor="let option of offeredOptions">
+      <div class="form-control w-52">
         <label class="label cursor-pointer">
-          <span class="label-text">{{ option.label }}</span>
+          <span class="label-text">Was offered?</span>
           <input
-            type="radio"
+            type="checkbox"
             name="is_offered"
-            class="radio radio-primary"
-            checked="checked"
             formControlName="is_offered"
-            [value]="option.value"
+            class="toggle toggle-primary"
+            checked="checked"
           />
         </label>
       </div>
     </div>
 
     <div>
-      <button type="submit" aria-label="submit" class="btn btn-outline btn-primary">Submit</button>
+      <button
+        type="submit"
+        aria-label="submit"
+        class="btn btn-outline btn-primary"
+      >
+        Submit
+      </button>
     </div>
   </form>
 </div>
