@@ -1,5 +1,9 @@
 <section class="w-screen px-5">
-  @if (giftIdeas.length > 0) { @for (idea of giftIdeas; track idea.id) {
+  @if (showLoadingMessage) {
+    <div><span class="loading loading-spinner text-primary"></span> Loading gift ideas...</div>
+  }
+
+  @if (!isLoading && giftIdeas.length > 0) { @for (idea of giftIdeas; track idea.id) {
   <div
     class="card bg-gray-800 w-full shadow-xl mb-3 cursor-pointer"
     (click)="onEditIdea(idea)"
@@ -50,7 +54,7 @@
       </p>
     </div>
   </div>
-  } } @else {
+  } } @else if (!isLoading && giftIdeas.length == 0) {
   <p>No gift ideas found for this user.</p>
   }
 </section>
