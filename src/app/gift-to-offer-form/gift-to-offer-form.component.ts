@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { SupabaseService } from '../supabase.service';
 import { Router } from '@angular/router';
+import { GiftIdea } from '../models/gift-idea-model';
 
 @Component({
   selector: 'app-gift-to-offer-form',
@@ -19,8 +20,16 @@ export class GiftToOfferFormComponent implements OnInit {
   ];
   session: any;
   submissionSuccess: boolean = false;
-  idea: any;
-
+  idea: GiftIdea = {
+    id: 0,
+    idea: '',
+    link: '',
+    price: 0,
+    occasion: '',
+    person_name: '',
+    is_offered: false
+  };
+  
   constructor(
     private readonly fb: FormBuilder, // Le formBuilder est initialisé ici
     private readonly supabase: SupabaseService,

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { SupabaseService } from '../supabase.service';
+import { GiftIdea } from '../models/gift-idea-model';
 
 @Component({
   selector: 'app-gift-idea-list',
@@ -14,7 +15,7 @@ export class GiftIdeaListComponent {
   isLoading = true;
   showLoadingMessage = false;
   loadingTimeout: any;
-  giftIdeas: any[] = [];
+  giftIdeas: GiftIdea[] = [];
   error: string | null = null;
   session: any;
 
@@ -78,7 +79,7 @@ export class GiftIdeaListComponent {
   /**
    * Navigates to the gift idea edit form with the selected idea.
    */
-  onEditIdea(idea: any) {
+  onEditIdea(idea: GiftIdea) {
     sessionStorage.setItem('selectedIdea', JSON.stringify(idea));
     this.router.navigate(['/gift-to-offer-form', idea.id]);
   }
@@ -86,7 +87,7 @@ export class GiftIdeaListComponent {
   /**
    * Deletes a specific gift idea from Supabase and updates the local list.
    */
-  async onDeleteIdea(idea: any): Promise<void> {
+  async onDeleteIdea(idea: GiftIdea): Promise<void> {
     const { error } = await this.supabase.deleteGiftIdea(idea.id);
     if (!error) {
       this.giftIdeas = this.giftIdeas.filter((g) => g.id !== idea.id);

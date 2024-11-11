@@ -8,6 +8,7 @@ import {
   User,
 } from '@supabase/supabase-js';
 import { environment } from '../environments/environment';
+import { GiftIdea } from './models/gift-idea-model';
 
 export interface Profile {
   id?: string;
@@ -95,7 +96,7 @@ export class SupabaseService {
   }
 
   // Fonction pour insérer les données dans la table `gift_ideas`
-  async addGiftIdea(giftData: any) {
+  async addGiftIdea(giftData: GiftIdea) {
     // Récupérer l'ID de l'utilisateur authentifié
     const user = this.session?.user.id;
 
@@ -115,7 +116,7 @@ export class SupabaseService {
     return data;
   }
 
-  async updateGiftIdea(id: number, data: any) {
+  async updateGiftIdea(id: number, data: GiftIdea) {
     // Récupérer l'ID de l'utilisateur authentifié
     const user = this.session?.user.id;
 
