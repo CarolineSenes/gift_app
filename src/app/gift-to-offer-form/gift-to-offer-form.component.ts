@@ -24,7 +24,7 @@ export class GiftToOfferFormComponent implements OnInit {
     id: 0,
     idea: '',
     link: '',
-    price: 0,
+    price: null,
     occasion: '',
     person_name: '',
     is_offered: false
@@ -39,7 +39,7 @@ export class GiftToOfferFormComponent implements OnInit {
     this.gift_ideas_form = this.fb.group({
       person_name: [''],
       idea: [''],
-      price: [''],
+      price: null,
       link: [''],
       occasion: [''],
       is_offered: [false],

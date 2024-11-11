@@ -4,8 +4,8 @@ export interface GiftIdea {
   id: number;
   idea: string;
   link?: string;
-  price?: number;
+  price?: number | null;
   occasion?: string;
   person_name?: string;
-  is_offered: boolean;
+  is_offered?: boolean;
 }
