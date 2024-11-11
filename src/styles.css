@@ -17,6 +17,10 @@
   font-weight: 500;
 }
 
+.gift-label {
+  font-weight: 500;
+}
+
 .tertiary-medium-text {
   color: var(--tertiary-color);
   font-weight: 500;

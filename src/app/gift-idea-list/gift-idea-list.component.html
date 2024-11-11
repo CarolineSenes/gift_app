@@ -41,7 +41,7 @@
         <span>
           @if(idea.link) {
           <a [href]="idea.link" target="_blank"
-            ><span class="secondary-medium-text">Link</span></a
+            ><span class="gift-label secondary-color">Link</span></a
           >
           } @else {
           <span>No link</span>
@@ -49,22 +49,22 @@
         </span>
       </p>
       <p class="flex justify-between">
-        <span class="secondary-medium-text">Price:</span>
+        <span class="gift-label">Price:</span>
         <span>{{ idea.price | currency : "EUR" }}</span>
       </p>
       <p class="flex justify-between">
-        <span class="secondary-medium-text">Occasion:</span>
+        <span class="gift-label">Occasion:</span>
         <span>{{ idea.occasion }}</span>
       </p>
       <p class="flex justify-between">
-        <span class="secondary-medium-text">Person name:</span>
+        <span class="gift-label">Person name:</span>
         <span>{{ idea.person_name }}</span>
       </p>
       <p class="flex justify-between">
-        <span class="secondary-medium-text">Offered</span>
+        <span class="gift-label">Offered</span>
         <span>
           @if(idea.is_offered) {
-          <span class="secondary-medium-text">
+          <span class="gift-label">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512"
