@@ -1,5 +1,5 @@
 <div class="flex flex-col">
-  <h1 class="text-xl font-bold mb-5">Gift idea to give</h1>
+  <h1 class="text-xl font-bold mb-6">Gift idea</h1>
   <form
     [formGroup]="gift_ideas_form"
     (ngSubmit)="onSubmit()"
@@ -7,21 +7,21 @@
   >
     <div>
       <label class="input input-bordered flex items-center gap-2" for="idea"
-        ><span class="font-semibold">Gift</span>
+        ><span class="secondary-medium-text">Gift</span>
         <input id="idea" formControlName="idea" class="grow" type="text" />
       </label>
     </div>
 
     <div>
       <label for="link" class="input input-bordered flex items-center gap-2"
-        ><span class="font-semibold">Link</span>
+        ><span class="secondary-medium-text">Link</span>
         <input id="link" formControlName="link" class="grow" type="text" />
       </label>
     </div>
 
     <div>
       <label for="link" class="input input-bordered flex items-center gap-2"
-        ><span class="font-semibold">Price</span>
+        ><span class="secondary-medium-text">Price</span>
         <input id="price" formControlName="price" class="grow" type="number" />
       </label>
     </div>
@@ -30,7 +30,7 @@
       <label
         for="person_name"
         class="input input-bordered flex items-center gap-2"
-        ><span class="font-semibold">To offer to</span>
+        ><span class="secondary-medium-text">To offer to</span>
         <input
           id="person_name"
           formControlName="person_name"
@@ -42,7 +42,7 @@
 
     <div>
       <label for="occasion" class="input input-bordered flex items-center gap-2"
-        ><span class="font-semibold">Occasion</span>
+        ><span class="secondary-medium-text">Occasion</span>
         <input
           id="occasion"
           formControlName="occasion"
@@ -55,7 +55,7 @@
     <div>
       <div class="form-control w-52">
         <label class="label cursor-pointer">
-          <span class="label-text">Was offered?</span>
+          <span class="label-text secondary-medium-text">Was offered?</span>
           <input
             type="checkbox"
             name="is_offered"
@@ -71,7 +71,7 @@
       <button
         type="submit"
         aria-label="submit"
-        class="btn btn-outline btn-primary"
+        class="btn btn-outline btn-primary mt-5"
       >
         Submit
       </button>

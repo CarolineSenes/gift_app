@@ -1,15 +1,17 @@
 <section class="w-screen px-5">
   @if (showLoadingMessage) {
-    <div><span class="loading loading-spinner text-primary"></span> Loading gift ideas...</div>
-  }
-
-  @if (!isLoading && giftIdeas.length > 0) { @for (idea of giftIdeas; track idea.id) {
+  <div>
+    <span class="loading loading-spinner primary-color"></span> Loading gift
+    ideas...
+  </div>
+  } @if (!isLoading && giftIdeas.length > 0) { @for (idea of giftIdeas; track
+  idea.id) {
   <div
     class="card bg-gray-800 w-full shadow-xl mb-3 cursor-pointer"
     (click)="onEditIdea(idea)"
   >
     <button
-      class="absolute top-2 right-2 btn btn-circle"
+      class="absolute top-7 right-7 btn btn-circle"
       (click)="onDeleteIdea(idea); $event.stopPropagation()"
     >
       <svg
@@ -34,23 +36,61 @@
       />
     </figure> -->
     <div class="card-body overflow-hidden">
-      <h2 class="card-title truncate text-primary">{{ idea.idea }}</h2>
+      <h2 class="card-title truncate primary-color">{{ idea.idea }}</h2>
       <p>
-        @if(idea.link) {
-        <a [href]="idea.link" target="_blank">Link</a>
-        } @else {
-        <span>No link</span>
-        }
+        <span>
+          @if(idea.link) {
+          <a [href]="idea.link" target="_blank"
+            ><span class="secondary-medium-text">Link</span></a
+          >
+          } @else {
+          <span>No link</span>
+          }
+        </span>
       </p>
-      <p>Price: {{ idea.price | currency : "EUR" }}</p>
-      <p>Occasion: {{ idea.occasion }}</p>
-      <p>Person name: {{ idea.person_name }}</p>
-      <p>
-        @if(idea.is_offered) {
-        <span>Offered ✅</span>
-        } @else {
-        <span>Offered ❌</span>
-        }
+      <p class="flex justify-between">
+        <span class="secondary-medium-text">Price:</span>
+        <span>{{ idea.price | currency : "EUR" }}</span>
+      </p>
+      <p class="flex justify-between">
+        <span class="secondary-medium-text">Occasion:</span>
+        <span>{{ idea.occasion }}</span>
+      </p>
+      <p class="flex justify-between">
+        <span class="secondary-medium-text">Person name:</span>
+        <span>{{ idea.person_name }}</span>
+      </p>
+      <p class="flex justify-between">
+        <span class="secondary-medium-text">Offered</span>
+        <span>
+          @if(idea.is_offered) {
+          <span class="secondary-medium-text">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+              class="h-4 w-4 ml-1"
+              fill="currentColor"
+            >
+              <path
+                d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"
+              />
+            </svg>
+          </span>
+          } @else {
+          <span class="tertiary-medium-text">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 384 512"
+              class="h-4 w-4 inline-block"
+              fill="currentColor"
+            >
+              <path
+                d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+              />
+            </svg>
+          </span>
+          }
+        </span>
       </p>
     </div>
   </div>
