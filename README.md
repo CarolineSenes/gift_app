@@ -1,6 +1,37 @@
 # KdoApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9.
+**kDo** is an application designed to help you organize and save gift ideas for others or yourself. Whether it's for a birthday, holiday, or simply to keep track of your own wish list, kDo makes it easy to manage and follow up on gift ideas.
+
+## Features
+
+- **Create and save** gift ideas with details such as name, link, price, recipient, and occasion.
+- **Gift status tracking**: mark ideas as offered or yet to be given.
+- **Search and filter**: quickly find ideas based on keywords or specific details. --> IN PROGRESS
+- **Edit and delete** gift ideas for flexible management.
+
+The application is built with Angular and Supabase, offering an intuitive interface for a seamless user experience.
+
+## Technologies
+
+- **Frontend**: [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9.
+- **Backend and Database**: Supabase
+- **Hosting**: Vercel
+
+## Installation
+
+1. Clone this repository:
+   ```bash
+   git clone <repository-url>
+
+2. Navigate to the project directory:
+   ```bash
+   cd kDo
+
+3. Install dependencies:
+   ```bash
+   npm install
+
+4. Configure your Supabase instance for backend functionality:
 
 ## Development server
 
