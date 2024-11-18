@@ -16,6 +16,9 @@ export class GiftIdeaListComponent {
   showLoadingMessage = false;
   loadingTimeout: any;
   giftIdeas: GiftIdea[] = [];
+  uniquePersonNames: string[] = [];
+  selectedPerson: string | null = null;
+  filteredGiftIdeas: GiftIdea[] = [];
   error: string | null = null;
   session: any;
 
@@ -27,6 +30,7 @@ export class GiftIdeaListComponent {
     if (this.session) {
       this.startLoadingMessage();
       await this.fetchGiftIdeas();
+      this.filteredGiftIdeas = this.giftIdeas;
       this.stopLoadingMessage();
     }
   }
@@ -73,7 +77,36 @@ export class GiftIdeaListComponent {
       this.error = 'Could not retrieve gift ideas.';
     } else {
       this.giftIdeas = data || [];
+      this.uniquePersonNames = [
+        ...new Set(
+          this.giftIdeas
+            .map((idea) => idea.person_name)
+            .filter((name): name is string => name !== undefined)
+        ),
+      ];
     }
+  }
+
+  /**
+   * Filters the gift ideas based on the selected person's name.
+   * Updates the filteredGiftIdeas array to display only the items for the selected person.
+   *
+   * @param person - The name of the person whose gift ideas are to be displayed.
+   */
+  selectPerson(person: string): void {
+    this.selectedPerson = person;
+    this.filteredGiftIdeas = this.giftIdeas.filter(
+      (idea) => idea.person_name === person
+    );
+  }
+
+  /**
+   * Resets the filter applied to the gift ideas.
+   * Clears the selectedPerson and restores the full list of gift ideas.
+   */
+  resetFilter(): void {
+    this.selectedPerson = null;
+    this.filteredGiftIdeas = this.giftIdeas;
   }
 
   /**

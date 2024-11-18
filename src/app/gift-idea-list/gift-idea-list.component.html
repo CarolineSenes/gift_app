@@ -4,8 +4,25 @@
     <span class="loading loading-spinner primary-color"></span> Loading gift
     ideas...
   </div>
-  } @if (!isLoading && giftIdeas.length > 0) { @for (idea of giftIdeas; track
-  idea.id) {
+  } @if (!isLoading && giftIdeas.length > 0) {
+  <div class="dropdown mb-3">
+    <div tabindex="0" role="button" class="btn m-1">
+      {{ selectedPerson || "Person name" }}
+    </div>
+    <ul
+      tabindex="0"
+      class="dropdown-content menu menu-sm bg-base-300 rounded-box z-[1] w-48 p-2 py-3 gap-3 shadow"
+    >
+      <li (click)="resetFilter()">
+        All
+      </li>
+      @for (person of uniquePersonNames; track $index){
+      <li (click)="selectPerson(person)">{{ person }}</li>
+      }
+    </ul>
+  </div>
+
+  @for (idea of filteredGiftIdeas; track idea.id) {
   <div
     class="card bg-gray-800 w-full shadow-xl mb-3 cursor-pointer"
     (click)="onEditIdea(idea)"
