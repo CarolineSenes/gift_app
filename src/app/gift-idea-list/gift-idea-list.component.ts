@@ -19,6 +19,7 @@ export class GiftIdeaListComponent {
   uniquePersonNames: string[] = [];
   selectedPerson: string | null = null;
   filteredGiftIdeas: GiftIdea[] = [];
+  isDropdownOpen = false;
   error: string | null = null;
   session: any;
 
@@ -98,6 +99,7 @@ export class GiftIdeaListComponent {
     this.filteredGiftIdeas = this.giftIdeas.filter(
       (idea) => idea.person_name === person
     );
+    this.isDropdownOpen = false;
   }
 
   /**
@@ -107,6 +109,14 @@ export class GiftIdeaListComponent {
   resetFilter(): void {
     this.selectedPerson = null;
     this.filteredGiftIdeas = this.giftIdeas;
+    this.isDropdownOpen = false;
+  }
+
+  /**
+   * Toggles the dropdown state.
+   */
+  toggleDropdown(): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 
   /**
