@@ -8,4 +8,6 @@ export interface GiftIdea {
   occasion?: string;
   person_name?: string;
   is_offered?: boolean;
+  offered_date?: Date | null;
+  offered_from?: string
 }

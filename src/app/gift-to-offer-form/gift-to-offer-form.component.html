@@ -62,10 +62,40 @@
             formControlName="is_offered"
             class="toggle toggle-primary"
             checked="checked"
+            (change)="onToggleOffered($event)"
           />
         </label>
       </div>
     </div>
+
+    @if (isOffered){
+    <div>
+      <label
+        for="offered_date"
+        class="input input-bordered flex items-center gap-2"
+        ><span class="gift-label">Date</span>
+        <input
+          id="offered_date"
+          formControlName="offered_date"
+          class="grow"
+          type="date"
+        />
+      </label>
+    </div>
+    <div>
+      <label
+        for="offered_from"
+        class="input input-bordered flex items-center gap-2"
+        ><span class="gift-label">From</span>
+        <input
+          id="offered_from"
+          formControlName="offered_from"
+          class="grow"
+          type="text"
+        />
+      </label>
+    </div>
+    }
 
     <div>
       <button
