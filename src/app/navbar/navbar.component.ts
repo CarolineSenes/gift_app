@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SupabaseService } from '../supabase.service';
 import { Router } from '@angular/router';
 
@@ -10,8 +10,7 @@ import { Router } from '@angular/router';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
-  session: any;
-  avatarUrl: string | undefined;
+  @Input() googleAvatarUrl: string | null = null;
 
   constructor(
     private readonly supabase: SupabaseService,
@@ -19,17 +18,6 @@ export class NavbarComponent {
   ) {}
 
   ngOnInit() {
-    // Initialisation de la session lors de l'initialisation du composant
-    this.session = this.supabase.session;
-
-    // Gestion des changements de session
-    this.supabase.authChanges((_, session) => {
-      this.session = session;
-    });
-
-    if (this.session) {
-      this.avatarUrl = this.session.user.user_metadata?.avatar_url;
-    }
   }
 
   navigateToGiftForm() {

@@ -1,4 +1,5 @@
 <div class="navbar bg-base-100 mb-5">
+  <!-- Logo -->
   <div class="flex-1">
     <a
       class="btn btn-ghost text-3xl font-extrabold tracking-wide primary-color"
@@ -7,8 +8,11 @@
       <span>k<span class="text-accent">Do</span></span>
     </a>
   </div>
+
+  <!-- Right side -->
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">
+      <!-- Add button -->
       <li class="mr-3">
         <a role="button" class="btn" (click)="navigateToGiftForm()">
           <svg
@@ -25,13 +29,21 @@
           Add
         </a>
       </li>
+
+      <!-- Avatar -->
       <li class="dropdown dropdown-end">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
           <div class="w-10 rounded-full">
+            <!-- <img
+              alt="Avatar"
+              [src]="avatarUrl || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'"
+            /> -->
+            @if(googleAvatarUrl){
             <img
-              alt="Tailwind CSS Navbar component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+              [src]="googleAvatarUrl"
+              alt="Avatar"
             />
+            }
           </div>
         </div>
         <ul

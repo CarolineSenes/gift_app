@@ -1,5 +1,5 @@
 @if(isAuthenticated){
-  <app-navbar></app-navbar>
+  <app-navbar [googleAvatarUrl]="googleAvatarUrl"></app-navbar>
 }
 <div class="container flex justify-center">
   <router-outlet></router-outlet>
