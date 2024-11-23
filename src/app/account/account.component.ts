@@ -1,55 +1,62 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AuthSession } from '@supabase/supabase-js';
 import { Profile, SupabaseService } from '../supabase.service';
-import { AvatarComponent } from "../avatar/avatar.component";
+import { AvatarComponent } from '../avatar/avatar.component';
 
 @Component({
   selector: 'app-account',
-  standalone: true, // Mode standalone activé
-  imports: [CommonModule, ReactiveFormsModule, AvatarComponent], // Ajout des modules nécessaires
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, AvatarComponent],
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css'],
 })
 export class AccountComponent implements OnInit {
   loading = false;
   profile!: Profile;
-  session: any; // Déclaration explicite avec `any` ou le type que tu utilises pour la session
+  session: any;
 
-  updateProfileForm: any; // Déclare le formulaire sans initialisation ici
+  updateProfileForm: any;
 
   constructor(
     private readonly supabase: SupabaseService,
-    private readonly formBuilder: FormBuilder // Le formBuilder est initialisé ici
+    private readonly formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    // Initialisation du formulaire dans ngOnInit après que formBuilder soit prêt
+    // Initializing the form
     this.updateProfileForm = this.formBuilder.group({
       username: '',
       website: '',
       avatar_url: '',
     });
 
-        // Initialisation de la session lors de l'initialisation du composant
-        this.session = this.supabase.session;
+    // Session initialization
+    this.session = this.supabase.session;
 
-        // Gestion des changements de session
-        this.supabase.authChanges((_, session) => {
-          this.session = session;
-        });
-    
+    // Managing session changes
+    this.supabase.authChanges((_, session) => {
+      this.session = session;
+    });
 
     this.getProfile();
   }
 
+  /**
+   * Retrieves the user's profile from the Supabase service and updates the profile form.
+   *
+   * @return {Promise<void>} A promise that resolves when the operation is complete.
+   */
   async getProfile() {
     try {
       this.loading = true;
 
       const { user } = this.session;
-      const { data: profile, error, status } = await this.supabase.profile(user);
+      const {
+        data: profile,
+        error,
+        status,
+      } = await this.supabase.profile(user);
 
       if (error && status !== 406) {
         throw error;
@@ -73,6 +80,11 @@ export class AccountComponent implements OnInit {
     }
   }
 
+  /**
+   * Updates the user's profile in the Supabase service.
+   *
+   * @return {Promise<void>} A promise that resolves when the profile update operation is complete.
+   */
   async updateProfile(): Promise<void> {
     try {
       this.loading = true;
@@ -98,18 +110,25 @@ export class AccountComponent implements OnInit {
     }
   }
 
-  async signOut() {
-    await this.supabase.signOut();
-  }
-
+  /**
+   * Retrieves the avatar URL from the reactive profile form.
+   *
+   * @return {string} The URL of the user's avatar.
+   */
   get avatarUrl() {
-    return this.updateProfileForm.value.avatar_url as string
+    return this.updateProfileForm.value.avatar_url as string;
   }
 
+  /**
+   * Updates the avatar URL in the reactive profile form and saves the updated profile.
+   *
+   * @param {string} event - The new avatar URL to set in the profile.
+   * @return {Promise<void>} A promise that resolves when the profile update is complete.
+   */
   async updateAvatar(event: string): Promise<void> {
     this.updateProfileForm.patchValue({
       avatar_url: event,
-    })
-    await this.updateProfile()
+    });
+    await this.updateProfile();
   }
 }
