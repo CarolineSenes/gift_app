@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { SupabaseService } from '../supabase.service';
 import { GiftIdea } from '../models/gift-idea-model';
+import { GiftIdeaComponent } from '../gift-idea/gift-idea.component';
 
 @Component({
   selector: 'app-gift-idea-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, GiftIdeaComponent],
   templateUrl: './gift-idea-list.component.html',
   styleUrl: './gift-idea-list.component.css',
 })
@@ -133,7 +134,17 @@ export class GiftIdeaListComponent {
   async onDeleteIdea(idea: GiftIdea): Promise<void> {
     const { error } = await this.supabase.deleteGiftIdea(idea.id);
     if (!error) {
+      // Updating the global list of ideas
       this.giftIdeas = this.giftIdeas.filter((g) => g.id !== idea.id);
+
+      // Synchronization with filtered list
+      if (this.selectedPerson) {
+        this.filteredGiftIdeas = this.giftIdeas.filter(
+          (g) => g.person_name === this.selectedPerson
+        );
+      } else {
+        this.filteredGiftIdeas = this.giftIdeas;
+      }
     } else {
       console.error(
         "Erreur lors de la suppression de l'idée dans Supabase :",
